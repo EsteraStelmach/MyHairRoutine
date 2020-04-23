@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Pane prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="140.0" text="My Hair Rutine">
+               <font>
+                  <Font name="Edwardian Script ITC" size="53.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <right>
+      <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <image>
+            <Image url="@../ikons/włosy.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+   </right>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <PasswordField promptText="Login">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </PasswordField>
+            <PasswordField promptText="Password">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Log in">
+               <font>
+                  <Font name="Dubai Regular" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+            </Button>
+            <Label text="Are you not register?">
+               <padding>
+                  <Insets left="20.0" top="40.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" text="Register">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Exit">
+               <VBox.margin>
+                  <Insets left="150.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children></VBox>
+   </left>
+</BorderPane>
