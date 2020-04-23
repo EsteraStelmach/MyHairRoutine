@@ -4,6 +4,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -13,11 +16,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        //Locale.setDefault(new Locale("pl"));
+        //Locale.setDefault(new Locale("nl"));
+        Locale.setDefault(new Locale("nl"));
+
         Stage stage = new Stage();
+        ResourceBundle bundle = ResourceBundle.getBundle("Bundles.messages");
 
         FXMLLoader fxmlLoader=new FXMLLoader();
-        fxmlLoader.setLocation(this.getClass().getResource("/fxml/LoginWindow.fxml"));
-        Parent loginWindowBorderPane = fxmlLoader.load();
+        Parent loginWindowBorderPane = fxmlLoader.load(this.getClass().getResource("/fxml/LoginWindow.fxml"),bundle);
 
         Scene scene = new Scene(loginWindowBorderPane);
         stage.setScene(scene);
