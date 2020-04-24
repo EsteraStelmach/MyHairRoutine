@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginWindowController">
    <top>
       <Pane prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,10 +21,14 @@
                </padding>
             </Label>
             <MenuButton layoutX="487.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="%loginWindow.languagesMenuBottom">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
+               <items>
+                  <RadioMenuItem mnemonicParsing="false" onAction="#changeLanguagesToPolish" text="Polish">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="languages" />
+                     </toggleGroup></RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" onAction="#changeLanguagesToNetherlands" text="Netherlands" toggleGroup="$languages" />
+                  <RadioMenuItem mnemonicParsing="false" onAction="#changeLanguagesToEnglish" text="English" toggleGroup="$languages" />
+               </items>
             </MenuButton>
          </children>
       </Pane>
@@ -48,17 +52,17 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField promptText="%loginWindow.passwordField.login">
+            <PasswordField fx:id="loginPasswordField" promptText="%loginWindow.passwordField.login">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <PasswordField promptText="%loginWindow.passwordField.password">
+            <PasswordField fx:id="passwordPasswordField" promptText="%loginWindow.passwordField.password">
                <VBox.margin>
                   <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </PasswordField>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="58.0" text="%loginWindow.loginBottom">
+            <Button fx:id="loginButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#loginToApplication" prefHeight="30.0" prefWidth="58.0" text="%loginWindow.loginBottom">
                <font>
                   <Font name="Dubai Regular" size="12.0" />
                </font>
