@@ -39,7 +39,7 @@
             <Insets />
          </BorderPane.margin>
          <image>
-            <Image url="@../ikons/włosy.jpg" />
+            <Image url="@../icons/hair.jpg" />
          </image>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -52,11 +52,11 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="loginPasswordField" promptText="%loginWindow.passwordField.login">
+            <TextField fx:id="loginText" promptText="%loginWindow.textField.login">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </PasswordField>
+            </TextField>
             <PasswordField fx:id="passwordPasswordField" promptText="%loginWindow.passwordField.password">
                <VBox.margin>
                   <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
@@ -75,7 +75,7 @@
                   <Insets left="20.0" top="40.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" text="%loginWindow.registerBottom">
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#openRegisterWindow" text="%loginWindow.registerBottom">
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>

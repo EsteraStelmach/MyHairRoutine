@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterWindowController">
+   <children>
+      <VBox layoutX="132.0" layoutY="88.0" prefHeight="200.0" prefWidth="138.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="138.0" text="%registerWindow.labelLogin">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Label>
+            <TextField promptText="%registerWindow.textFieldLogin">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></TextField>
+            <Label prefHeight="17.0" prefWidth="139.0" text="%registerWindow.labelPassword">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Label>
+            <TextField promptText="%registerWindow.textFieldPassword">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></TextField>
+            <TextField promptText="%registerWindow.textFieldRepeatPassword">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin></TextField>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="%registerWindow.registerButton">
+               <VBox.margin>
+                  <Insets left="70.0" />
+               </VBox.margin></Button>
+         </children>
+      </VBox>
+      <Label layoutX="219.0" layoutY="7.0" prefHeight="42.0" prefWidth="170.0" text="%registerWindow.title">
+         <font>
+            <Font name="Dubai Regular" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="364.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/registerIcon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="392.0" layoutY="336.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="138.0" text="%registerWindow.backButton" />
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="405.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/backIcon.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ce372807-06cf-47f9-bc52-b59695164dbc">
-        <schema name="hairroutine" object-types="column, dataset trigger, function, table, procedure, index, view, constraint" />
+        <schema name="hairroutine" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
