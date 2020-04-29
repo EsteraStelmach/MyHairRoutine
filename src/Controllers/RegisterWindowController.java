@@ -3,9 +3,11 @@ package Controllers;
 import Properties.RegisterWindowProperties;
 import dataBase.DataBaseConnection;
 import dataBase.User;
+import utils.DialogsUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
@@ -13,6 +15,7 @@ public class RegisterWindowController{
 
     @FXML
     public TextField loginTextField;
+    public Button backButton;
     @FXML
     protected TextField passwordTextField1;
     @FXML
@@ -23,6 +26,7 @@ public class RegisterWindowController{
     private RegisterWindowProperties registerWindowProperties = new RegisterWindowProperties();
     private DataBaseConnection baseConnection = new DataBaseConnection();
     private User user = new User();
+    private LoginWindowController loginWindow = new LoginWindowController();
 
 
     @FXML
@@ -40,7 +44,7 @@ public class RegisterWindowController{
         if(isPasswordEqualsRepeatPassword()) {
            user.insertUser(loginTextField.getText(), passwordTextField1.getText());
         }else{
-            System.out.println("Passwords are not the same");
+            DialogsUtils.registerPasswordAreNotTheSame();
         }
     }
 
@@ -49,35 +53,9 @@ public class RegisterWindowController{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void backToLoginWindow() {
+        Stage window = (Stage) backButton.getScene().getWindow();
+        window.setScene(loginWindow.setLoginWindowScene());
+        window.show();
+    }
 }

@@ -1,6 +1,7 @@
 package dataBase;
 
 import Properties.DataBaseProperties;
+import utils.DialogsUtils;
 
 import java.sql.*;
 
@@ -26,12 +27,10 @@ public class DataBaseConnection {
 
     public void connect() {
         try {
-            System.out.println("Connecting....");
             connection = DriverManager.getConnection(url, user, password);
             statement= connection.createStatement();
-            if(!connection.isClosed()) System.out.println("dziąła");
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            DialogsUtils.errorDialogConnectingToDataBase(e.getMessage());
         }
     }
 

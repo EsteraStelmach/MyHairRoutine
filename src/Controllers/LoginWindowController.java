@@ -3,17 +3,20 @@ package Controllers;
 import Properties.LoginWindowProperties;
 import dataBase.DataBaseConnection;
 import dataBase.User;
+import utils.DialogsUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import utils.fxmlUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginWindowController {
@@ -38,33 +41,11 @@ public class LoginWindowController {
     @FXML
     private Button registerButton;
 
-
     private LoginWindowProperties loginWindowProperties = new LoginWindowProperties();
-
-    private ResourceBundle bundle = ResourceBundle.getBundle("Bundles.messages");
 
     private DataBaseConnection baseConnection = new DataBaseConnection();
 
-   private User user = new User();
-
-    public Button getExitButton() {
-        return exitButton;
-    }
-
-    public Scene setLoginWindowScene(){
-       FXMLLoader fxmlLoader = new FXMLLoader();
-       Parent loginWindowBorderPane;
-       Scene scene=null;
-       try {
-           loginWindowBorderPane = fxmlLoader.load(getClass().getResource(loginWindowFxmlName), bundle);
-           scene= new Scene(loginWindowBorderPane);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-
-
-     return scene;
-   }
+    private User user = new User();
 
     @FXML
     public void initialize(){
@@ -77,6 +58,43 @@ public class LoginWindowController {
         user.connect();
     }
 
+
+    public Scene setLoginWindowScene(){
+       Scene scene= new Scene(fxmlUtils.fxmlLoader(loginWindowFxmlName));
+
+        return scene;
+    }
+
+
+    public void loginToApplication() {
+        if (user.isLoginAndPasswordCorrect(loginText.getText(), passwordPasswordField.getText())) {
+            Scene mainApplicationWindowScene = new Scene(fxmlUtils.fxmlLoader(mainApplicationWindowFxml));
+            Stage window = (Stage) loginButton.getScene().getWindow();
+            window.setScene(mainApplicationWindowScene);
+            window.show();
+        } else {
+            DialogsUtils.userLoginOrPasswordIsNotCorrect();
+        }
+    }
+
+    public void openRegisterWindow() {
+
+        Scene registerWindowScene = new Scene(fxmlUtils.fxmlLoader(registerWindowFxmlName));
+        Stage window = (Stage) registerButton.getScene().getWindow();
+        window.setScene(registerWindowScene);
+
+
+
+    }
+
+    public void closeApplication() {
+        Optional result = DialogsUtils.exitApplication();
+        if(result.get()== ButtonType.OK) {
+            Stage stage = (Stage) exitButton.getScene().getWindow();
+            stage.close();
+        }
+    }
+
     public void changeLanguagesToPolish() {
         //Locale.setDefault(new Locale("pl"));
     }
@@ -87,43 +105,5 @@ public class LoginWindowController {
 
     public void changeLanguagesToEnglish() {
         //Locale.setDefault(new Locale("en"));
-    }
-
-    public void loginToApplication() {
-        try {
-            if(user.isLoginAndPasswordCorrect(loginText.getText(),passwordPasswordField.getText())) {
-                Parent mainApplicationWindowParent = FXMLLoader.load(getClass().getResource(mainApplicationWindowFxml), bundle);
-                Scene mainApplicationWindowScene = new Scene(mainApplicationWindowParent);
-                Stage window = (Stage) loginButton.getScene().getWindow();
-                window.setScene(mainApplicationWindowScene);
-                window.show();
-            }else{
-                System.out.println("Incorrect login or password");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void openRegisterWindow() {
-
-        try {
-            Parent registerWindowParent = FXMLLoader.load(getClass().getResource(registerWindowFxmlName),bundle);
-            Scene registerWindowScene = new Scene(registerWindowParent);
-            Stage window = (Stage) registerButton.getScene().getWindow();
-            window.setScene(registerWindowScene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void closeApplication() {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
     }
 }
