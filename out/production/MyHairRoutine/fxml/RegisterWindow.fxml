@@ -14,7 +14,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></Label>
-            <TextField promptText="%registerWindow.textFieldLogin">
+            <TextField fx:id="loginTextField" promptText="%registerWindow.textFieldLogin">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></TextField>
@@ -22,17 +22,17 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></Label>
-            <TextField promptText="%registerWindow.textFieldPassword">
+            <TextField fx:id="passwordTextField1" promptText="%registerWindow.textFieldPassword">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin></TextField>
-            <TextField promptText="%registerWindow.textFieldRepeatPassword">
+            <TextField fx:id="passwordTextField2" promptText="%registerWindow.textFieldRepeatPassword">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin></TextField>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="%registerWindow.registerButton">
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerUserAndSwitchWindow" prefHeight="25.0" prefWidth="87.0" text="%registerWindow.registerButton">
                <VBox.margin>
-                  <Insets left="70.0" />
+                  <Insets left="50.0" />
                </VBox.margin></Button>
          </children>
       </VBox>

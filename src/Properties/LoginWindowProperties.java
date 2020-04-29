@@ -26,51 +26,20 @@ public class LoginWindowProperties {
 
     }
 
-    public String getLoginFieldProperty() {
-        return loginFieldProperty.get();
-    }
-
     public StringProperty loginFieldPropertyProperty() {
         return loginFieldProperty;
-    }
-
-    public void setLoginFieldProperty(String loginFieldProperty) {
-        this.loginFieldProperty.set(loginFieldProperty);
-    }
-
-    public String getPasswordFieldProperty() {
-        return passwordFieldProperty.get();
     }
 
     public StringProperty passwordFieldPropertyProperty() {
         return passwordFieldProperty;
     }
 
-    public void setPasswordFieldProperty(String passwordFieldProperty) {
-        this.passwordFieldProperty.set(passwordFieldProperty);
-    }
-
-    public boolean isDisablePasswordProperty() {
-        return disablePasswordProperty.get();
-    }
-
     public BooleanProperty disablePasswordPropertyProperty() {
         return disablePasswordProperty;
-    }
-
-    public void setDisablePasswordProperty(boolean disablePasswordProperty) {
-        this.disablePasswordProperty.set(disablePasswordProperty);
-    }
-
-    public boolean isLoginButtonProperty() {
-        return loginButtonProperty.get();
     }
 
     public BooleanProperty loginButtonPropertyProperty() {
         return loginButtonProperty;
     }
 
-    public void setLoginButtonProperty(boolean loginButtonProperty) {
-        this.loginButtonProperty.set(loginButtonProperty);
-    }
 }
