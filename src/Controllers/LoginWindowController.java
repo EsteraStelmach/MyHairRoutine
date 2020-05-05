@@ -15,9 +15,9 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import utils.fxmlUtils;
 
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
-import java.util.ResourceBundle;
+
 
 public class LoginWindowController {
 
@@ -43,9 +43,7 @@ public class LoginWindowController {
 
     private LoginWindowProperties loginWindowProperties = new LoginWindowProperties();
 
-    private DataBaseConnection baseConnection = new DataBaseConnection();
 
-    private User user = new User();
 
     @FXML
     public void initialize(){
@@ -54,8 +52,8 @@ public class LoginWindowController {
         passwordPasswordField.textProperty().bindBidirectional(loginWindowProperties.passwordFieldPropertyProperty());
         passwordPasswordField.disableProperty().bind(loginWindowProperties.disablePasswordPropertyProperty());
         loginButton.disableProperty().bind(loginWindowProperties.loginButtonPropertyProperty());
-        baseConnection.connect();
-        user.connect();
+        DataBaseConnection.connect();
+
     }
 
 
@@ -66,14 +64,20 @@ public class LoginWindowController {
     }
 
 
-    public void loginToApplication() {
+    public void loginToApplication() throws SQLException {
+        User user = new User();
         if (user.isLoginAndPasswordCorrect(loginText.getText(), passwordPasswordField.getText())) {
+            user.selectIdUser(loginText.getText());
+            user.setUserLogin(loginText.getText());
+            user.setUserPassword(passwordPasswordField.getText());
             Scene mainApplicationWindowScene = new Scene(fxmlUtils.fxmlLoader(mainApplicationWindowFxml));
             Stage window = (Stage) loginButton.getScene().getWindow();
             window.setScene(mainApplicationWindowScene);
             window.show();
         } else {
             DialogsUtils.userLoginOrPasswordIsNotCorrect();
+            loginText.clear();
+            passwordPasswordField.clear();
         }
     }
 

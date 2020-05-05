@@ -3,29 +3,34 @@ package Controllers;
 import Properties.RegisterWindowProperties;
 import dataBase.DataBaseConnection;
 import dataBase.User;
+import dataBase.UserUtils;
+import javafx.scene.Scene;
 import utils.DialogsUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import utils.fxmlUtils;
 import java.sql.SQLException;
 
 public class RegisterWindowController{
 
+    private String secondRegisterWindowName = "/fxml/SecondRegisterWindow.fxml";
+
     @FXML
-    public TextField loginTextField;
-    public Button backButton;
+    private TextField loginTextField;
     @FXML
-    protected TextField passwordTextField1;
+    private Button backButton;
     @FXML
-    protected TextField passwordTextField2;//repeat password
+    private TextField passwordTextField1;
     @FXML
-    protected Button registerButton;
+    private TextField passwordTextField2;//repeat password
+    @FXML
+    private Button registerButton;
+
+    private User user = new User();
 
     private RegisterWindowProperties registerWindowProperties = new RegisterWindowProperties();
-    private DataBaseConnection baseConnection = new DataBaseConnection();
-    private User user = new User();
     private LoginWindowController loginWindow = new LoginWindowController();
 
 
@@ -35,16 +40,40 @@ public class RegisterWindowController{
         passwordTextField1.textProperty().bindBidirectional(registerWindowProperties.passwordTextFieldPropertyProperty());
         passwordTextField2.textProperty().bindBidirectional(registerWindowProperties.passwordTextField2PropertyProperty());
         registerButton.disableProperty().bind(registerWindowProperties.registerButtonPropertyProperty());
-        baseConnection.connect();
-        user.connect();
+        DataBaseConnection.connect();
+
 
     }
 
     public void registerUserAndSwitchWindow () throws SQLException {
         if(isPasswordEqualsRepeatPassword()) {
-           user.insertUser(loginTextField.getText(), passwordTextField1.getText());
+            setSecondRegisterWindowScene();
         }else{
             DialogsUtils.registerPasswordAreNotTheSame();
+        }
+    }
+
+    private void setSecondRegisterWindowScene() throws SQLException {
+        if(!user.isThisUserLoginNotExists(loginTextField.getText())) {
+            tryInsertUser();
+            Scene secondRegisterWindowScene = new Scene(fxmlUtils.fxmlLoader(secondRegisterWindowName));
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            stage.setScene(secondRegisterWindowScene);
+            stage.show();
+        }else {
+            DialogsUtils.thisLoginAlreadyExistsAlert();
+            loginTextField.clear();
+            passwordTextField1.clear();
+            passwordTextField2.clear();
+        }
+    }
+
+    private void tryInsertUser(){
+        try {
+            user.insertUser(loginTextField.getText(), passwordTextField1.getText());
+            UserUtils.setLogin(loginTextField.getText());
+        } catch (Exception e) {
+            DialogsUtils.errorDialogConnectingToDataBase(e);
         }
     }
 

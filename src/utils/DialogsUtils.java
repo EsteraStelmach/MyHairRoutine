@@ -5,6 +5,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -41,18 +42,27 @@ public class DialogsUtils {
 
     }
 
+    public static void thisLoginAlreadyExistsAlert(){
+        Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
+        informationAlert.setTitle(bundle.getString("registerWindow.thisLoginAlreadyExists.title"));
+        informationAlert.setHeaderText(null);
+        informationAlert.setContentText(bundle.getString("registerWindow.thisLoginAlreadyExists.message"));
+        informationAlert.show();
+    }
+
     public static void errorDialogLoadingFXMLFiles(Exception error){
         Alert errorAlert = new Alert (Alert.AlertType.ERROR);
         errorAlert.setTitle(bundle.getString("error.FXMLLoader.title"));
-        errorAlert.setHeaderText(bundle.getString(error.getMessage()));
+        errorAlert.setHeaderText(error.getMessage());
+        
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         error.printStackTrace(pw);
-        pw.close();
 
         TextArea textArea = new TextArea(sw.toString());
         textArea.setEditable(false);
+        textArea.setWrapText(true);
 
         textArea.setMaxHeight(Double.MAX_VALUE);
         textArea.setMaxWidth(Double.MAX_VALUE);
@@ -61,23 +71,39 @@ public class DialogsUtils {
         GridPane.setVgrow(textArea,Priority.ALWAYS);
 
         GridPane root = new GridPane();
-        root.setVisible(false);
         root.setMaxWidth(Double.MAX_VALUE);
         root.add(textArea, 0,1);
 
-        errorAlert.getDialogPane().setContent(textArea);
+        errorAlert.getDialogPane().setContent(root);
         errorAlert.show();
 
     }
 
-    public static void errorDialogConnectingToDataBase(String error){
+    public static void errorDialogConnectingToDataBase(Exception error){
         Alert errorAlert = new Alert (Alert.AlertType.ERROR);
-        errorAlert.setTitle(bundle.getString("error.FXMLLoader.title"));
-        errorAlert.setHeaderText(bundle.getString("error.FXMLLoader.message"));
+        errorAlert.setTitle(bundle.getString("error.connectToDataBase.title"));
+        errorAlert.setHeaderText(error.getMessage());
 
-        TextArea textArea = new TextArea(error);
-        errorAlert.getDialogPane().setContent(textArea);
-        errorAlert.showAndWait();
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        error.printStackTrace(pw);
+
+        TextArea textArea = new TextArea(sw.toString());
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        textArea.setMaxWidth(Double.MAX_VALUE);
+
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+        GridPane.setVgrow(textArea,Priority.ALWAYS);
+
+        GridPane root = new GridPane();
+        root.setMaxWidth(Double.MAX_VALUE);
+        root.add(textArea, 0,1);
+
+        errorAlert.getDialogPane().setContent(root);
+        errorAlert.show();
 
     }
 

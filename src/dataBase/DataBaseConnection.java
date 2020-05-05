@@ -7,11 +7,11 @@ import java.sql.*;
 
 public class DataBaseConnection {
 
-    private String url = "jdbc:mysql://localhost:3306/hairroutine";
-    private DataBaseProperties dataBaseProperties = new DataBaseProperties();
-    protected Connection connection;
-    private ResultSet resultSet;
-    private Statement statement;
+    private static String url = "jdbc:mysql://localhost:3306/hairroutine";
+    private static DataBaseProperties dataBaseProperties = new DataBaseProperties();
+    protected static Connection connection;
+    private  ResultSet resultSet;
+
     private String query;
     protected PreparedStatement preparedStatement=null;
 
@@ -20,18 +20,28 @@ public class DataBaseConnection {
     //String password = "admin";
 
     //my localhost
-    private String user = dataBaseProperties.getUserProperty();
-    private String password = dataBaseProperties.getPasswordProperty();
+    private static String user = dataBaseProperties.getUserProperty();
+    private static String password = dataBaseProperties.getPasswordProperty();
 
     public DataBaseConnection() { }
 
-    public void connect() {
+    public static Connection connect() {
         try {
             connection = DriverManager.getConnection(url, user, password);
-            statement= connection.createStatement();
         } catch (Exception e) {
-            DialogsUtils.errorDialogConnectingToDataBase(e.getMessage());
+            DialogsUtils.errorDialogConnectingToDataBase(e);
         }
+        return connection;
+    }
+    public static PreparedStatement makePreparedStatement(String query){
+        PreparedStatement preparedStatement=null;
+        try {
+           preparedStatement = connect().prepareStatement(query);
+        } catch (Exception exception) {
+            DialogsUtils.errorDialogConnectingToDataBase(exception);
+        }
+        return preparedStatement;
+
     }
 
 
