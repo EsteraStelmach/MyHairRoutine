@@ -1,51 +1,34 @@
 package dataBase;
 
-import utils.DialogsUtils;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class User {
 
-    private int idUser;
-    private String userLogin;
-    private String userPassword;
-    private String firstName;
-    private String lastName;
-    private String hairTwistType;
-    private String hairPorosity;
 
 
     private ArrayList<String> usersPassword = new ArrayList<>();
     private ArrayList<String> usersLogin = new ArrayList<>();
 
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
 
     public User()  {
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
 
     public void insertUser(String login, String password) throws SQLException {
 
         String query = "INSERT INTO users (iduser,login,password) VALUES (NULL,?,?)";
-
         PreparedStatement preparedStatement = (DataBaseConnection.makePreparedStatement(query));
 
         preparedStatement.setString(1, login);
         preparedStatement.setString(2, password);
         preparedStatement.execute();
         preparedStatement.close();
-        this.userLogin=login;
-        this.userPassword=password;
+
     }
 
 
@@ -59,7 +42,6 @@ public class User {
         for (String findLogin:usersLogin) {
             if(findLogin.equals(userLoginInput)){
                 isLoginCorrect=true;
-                userLogin = userLoginInput;
             }
         }
         return isLoginCorrect;
@@ -71,7 +53,6 @@ public class User {
         for (String findPassword:usersPassword) {
             if(findPassword.equals(userPasswordInput)){
                 isPasswordCorrect=true;
-                userPassword= userPasswordInput;
             }
         }
         return isPasswordCorrect;
@@ -101,53 +82,44 @@ public class User {
     }
 
     public void setFirstName(String firstName) throws SQLException {
-        this.firstName=firstName;
         upDatePrepareStatement("firstname",firstName);
     }
 
     public void setLastName(String lastName) throws SQLException {
-        this.lastName=lastName;
       upDatePrepareStatement("lastname",lastName);
     }
 
     public void setHairTwistType(String hairTwistType) throws SQLException {
-        this.hairTwistType=hairTwistType;
         upDatePrepareStatement("hairtwisttype",hairTwistType);
     }
 
     public void setHairPorosity(String hairPorosity) throws SQLException {
-        this.hairPorosity=hairPorosity;
-        upDatePrepareStatement("hairporosity",hairPorosity);
+        upDatePrepareStatement("hairporosity",convertHairPorosityString(hairPorosity));
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public String getUserLogin() {
-        return userLogin;
-    }
 
     private void upDatePrepareStatement(String column, String value) throws SQLException {
-        String query = "UPDATE users SET "+column+"=? WHERE iduser=?";
+        String query = "UPDATE users SET "+column+"=? WHERE login=?";
         PreparedStatement preparedStatement =  (DataBaseConnection.makePreparedStatement(query));
         preparedStatement.setString(1,value);
-        preparedStatement.setInt(2,this.idUser);
+        preparedStatement.setString(2,UserUtils.getLogin());
         preparedStatement.execute();
         preparedStatement.close();
-
-
     }
 
-    public int selectIdUser(String login) throws SQLException {
-       String query = "SELECT iduser FROM users WHERE login='"+login+"'";
-       ResultSet resultSet =  (DataBaseConnection.makePreparedStatement(query)).executeQuery();
-       while (resultSet.next()){
-           this.idUser = resultSet.getInt("iduser");
-           System.out.println(idUser);
-       }
-       return idUser;
+    private String convertHairPorosityString(String hairPorosity){
+        String porosity=null;
+        if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.low"))){
+            porosity="L";
+        }else if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.medium"))){
+            porosity="M";
+        }else if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.high"))){
+            porosity="H";
+        }
+        return porosity;
     }
+
+
 
 
 

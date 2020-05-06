@@ -1,12 +1,10 @@
 package Controllers;
 
-import Properties.RegisterWindowProperties;
 import Properties.SecondRegisterWindowProperties;
 import dataBase.User;
 import dataBase.UserUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,8 +39,8 @@ public class SecondRegisterWindowController {
 
     private ResourceBundle bundle = ResourceBundle.getBundle("Bundles.messages");
 
-    private RegisterWindowController registerWindowController = new RegisterWindowController();
-    private User user;
+
+    private User user= new User();
 
     public SecondRegisterWindowController()  {
     }
@@ -52,17 +50,12 @@ public class SecondRegisterWindowController {
     public void initialize() throws SQLException {
         loadHairPorosityList();
         loadHairTwistList();
-        setUser();
+        UserUtils.selectUserInformation(UserUtils.getLogin());
 
 
 
     }
 
-    private void setUser() throws SQLException {
-       user= new User();
-       user.setUserLogin(UserUtils.getLogin());
-       user.selectIdUser(UserUtils.getLogin());
-    }
 
     private void loadHairPorosityList(){
         String low=bundle.getString("secondRegisterWindow.choiceBox.label.low");
@@ -90,6 +83,8 @@ public class SecondRegisterWindowController {
         }
         if(!(choiceBoxHairTwist==null))
         user.setHairTwistType(choiceBoxHairTwist.getValue());
+
+        UserUtils.selectUserInformation(UserUtils.getLogin());
 
         Scene mainApplicationWindowScene = new Scene(fxmlUtils.fxmlLoader(mainApplicationWindowFxml));
         Stage window = (Stage) confirmButton.getScene().getWindow();

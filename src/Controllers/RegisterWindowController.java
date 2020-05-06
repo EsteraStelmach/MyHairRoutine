@@ -72,6 +72,7 @@ public class RegisterWindowController{
         try {
             user.insertUser(loginTextField.getText(), passwordTextField1.getText());
             UserUtils.setLogin(loginTextField.getText());
+            UserUtils.setPassword(passwordTextField1.getText());
         } catch (Exception e) {
             DialogsUtils.errorDialogConnectingToDataBase(e);
         }

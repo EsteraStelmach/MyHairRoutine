@@ -62,7 +62,7 @@
                   <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="loginButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#loginToApplication" prefHeight="30.0" prefWidth="58.0" text="%loginWindow.loginBottom">
+            <Button fx:id="loginButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#loginToApplication"  prefHeight="30.0" prefWidth="58.0" text="%loginWindow.loginBottom">
                <font>
                   <Font name="Dubai Regular" size="12.0" />
                </font>

@@ -3,6 +3,8 @@ package Controllers;
 import Properties.LoginWindowProperties;
 import dataBase.DataBaseConnection;
 import dataBase.User;
+import dataBase.UserUtils;
+import javafx.scene.input.DragEvent;
 import utils.DialogsUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import utils.fxmlUtils;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -25,6 +28,8 @@ public class LoginWindowController {
     private String loginWindowFxmlName = "/fxml/LoginWindow.fxml";
     private String registerWindowFxmlName = "/fxml/RegisterWindow.fxml";
     private String mainApplicationWindowFxml = "/fxml/MainApplicationWindow.fxml";
+
+    private static Stage window;
 
     @FXML
     private TextField loginText;
@@ -42,7 +47,6 @@ public class LoginWindowController {
     private Button registerButton;
 
     private LoginWindowProperties loginWindowProperties = new LoginWindowProperties();
-
 
 
     @FXML
@@ -67,11 +71,11 @@ public class LoginWindowController {
     public void loginToApplication() throws SQLException {
         User user = new User();
         if (user.isLoginAndPasswordCorrect(loginText.getText(), passwordPasswordField.getText())) {
-            user.selectIdUser(loginText.getText());
-            user.setUserLogin(loginText.getText());
-            user.setUserPassword(passwordPasswordField.getText());
+            UserUtils.setLogin(loginText.getText());
+            UserUtils.setPassword(passwordPasswordField.getText());
+            UserUtils.selectUserInformation(loginText.getText());
             Scene mainApplicationWindowScene = new Scene(fxmlUtils.fxmlLoader(mainApplicationWindowFxml));
-            Stage window = (Stage) loginButton.getScene().getWindow();
+            window = (Stage) loginButton.getScene().getWindow();
             window.setScene(mainApplicationWindowScene);
             window.show();
         } else {
@@ -79,6 +83,10 @@ public class LoginWindowController {
             loginText.clear();
             passwordPasswordField.clear();
         }
+    }
+
+    public static Stage getWindow() {
+        return window;
     }
 
     public void openRegisterWindow() {
@@ -110,4 +118,5 @@ public class LoginWindowController {
     public void changeLanguagesToEnglish() {
         //Locale.setDefault(new Locale("en"));
     }
+
 }
