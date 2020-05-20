@@ -50,6 +50,7 @@ public class SecondRegisterWindowController {
         loadHairTwistList();
     }
 
+
     public static ObservableList getHairPorosityList() {
         hairPorosityList.addAll(low,medium,high);
         return hairPorosityList;

@@ -11,6 +11,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iduser")
     private  int id;
+    @OneToOne
+    @JoinColumn
+    private UserHairRoutine userHairRoutine;
     private String login;
     private String password;
     @Column(name = "firstname")
@@ -23,6 +26,14 @@ public class User {
     private String hairPorosity;
 
     public User()  {
+    }
+
+    public UserHairRoutine getUserHairRoutine() {
+        return userHairRoutine;
+    }
+
+    public void setUserHairRoutine(UserHairRoutine userHairRoutine) {
+        this.userHairRoutine = userHairRoutine;
     }
 
     public int getId() {

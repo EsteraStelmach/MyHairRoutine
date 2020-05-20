@@ -72,8 +72,7 @@ public class RegisterWindowController{
         }
     }
 
-    public User makeUser() {
-        User testUser = new User();
+    public void makeUser() {
         try {
             user.setLogin(loginTextField.getText());
             user.setPassword(passwordTextField1.getText());
@@ -81,10 +80,11 @@ public class RegisterWindowController{
             UserUtils.setPassword(passwordTextField1.getText());
             UserUtils.persistUser(user,entityManager);
             entityManager.getTransaction().commit();
+            UserUtils.getFoundUsers().add(user);
         } catch (Exception e) {
            DialogsUtils.errorDialogConnectingToDataBase(e);
         }
-        return testUser;
+
     }
 
     private boolean isPasswordEqualsRepeatPassword(){

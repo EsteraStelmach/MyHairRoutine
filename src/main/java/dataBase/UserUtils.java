@@ -1,7 +1,10 @@
 package dataBase;
 import dataBase.domain.User;
+import dataBase.domain.UserHairRoutine;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,9 +18,18 @@ public class UserUtils {
     private static String name;
     private static String lastName;
     private static User user;
-    private static List<User> foundUsers;
+    private static List<User> foundUsers = new ArrayList<>();
+    private static UserHairRoutine userHairRoutine= new UserHairRoutine();
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
+
+    public static UserHairRoutine getUserHairRoutine() {
+        return userHairRoutine;
+    }
+
+    public static void setUserHairRoutine(UserHairRoutine userHairRoutine) {
+        UserUtils.userHairRoutine = userHairRoutine;
+    }
 
     public static List<User> getFoundUsers() {
         return foundUsers;
@@ -163,6 +175,7 @@ public class UserUtils {
         System.out.println(id);
     }
     public static void setFoundUser(String login, EntityManager entityManager){
+        foundUsers.clear();
         Query query = entityManager.createQuery(
                 "SELECT u from User u WHERE u.login= :login", User.class).
                 setParameter("login", login);
@@ -172,6 +185,8 @@ public class UserUtils {
 
     public static void persistUser(User user,EntityManager entityManager){
        entityManager.persist(user);
+       entityManager.persist(userHairRoutine);
+       user.setUserHairRoutine(userHairRoutine);
 
     }
 
