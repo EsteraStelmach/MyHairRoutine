@@ -92,10 +92,7 @@
     </Tab>
     <Tab text="%mainApplicationWindow.tap2">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0">
-               <children>
-                  <TreeView fx:id="treeViewMyRoutine" layoutX="30.0" layoutY="13.0" prefWidth="412.0" />
-               </children></AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0" />
       </content>
     </Tab>
       <Tab text="%mainApplicationWindow.tap3">
@@ -107,12 +104,19 @@
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0">
                <children>
-                  <TreeView fx:id="productsTreeView" layoutX="15.0" layoutY="63.0" prefHeight="302.0" prefWidth="285.0" />
-                  <Label layoutX="190.0" layoutY="14.0" prefHeight="37.0" prefWidth="221.0" text="%mainApplicationWindow.tap4">
+                  <TreeView fx:id="productsTreeView" layoutX="14.0" layoutY="76.0" prefHeight="280.0" prefWidth="285.0" showRoot="false" />
+                  <Label layoutX="45.0" layoutY="8.0" prefHeight="47.0" prefWidth="247.0" text="%mainApplicationWindow.tap4">
                      <font>
-                        <Font name="Curlz MT" size="24.0" />
+                        <Font name="Curlz MT" size="36.0" />
                      </font>
                   </Label>
+                  <TextArea editable="false" layoutX="344.0" layoutY="69.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Label layoutX="338.0" layoutY="44.0" text="%mainApplicationWindow.tap4.label">
+                     <font>
+                        <Font name="Dubai Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addNewProduct" layoutX="362.0" layoutY="302.0" mnemonicParsing="false" onAction="#addNewProduct" prefHeight="25.0" prefWidth="216.0" text="%mainApplicationWindow.tap4.button" />
                </children></AnchorPane>
           </content>
       </Tab>

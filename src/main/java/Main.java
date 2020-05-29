@@ -11,10 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        LoginWindowController loginWindow = new LoginWindowController();
-
-        Stage stage = new Stage();
-        stage.setScene(loginWindow.setLoginWindowScene());
+        Stage stage = LoginWindowController.getWindow();
+        stage.setScene(LoginWindowController.setLoginWindowScene());
         stage.show();
 
 

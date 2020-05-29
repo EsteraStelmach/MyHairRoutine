@@ -50,7 +50,7 @@ public class DialogsUtils {
         informationAlert.show();
     }
 
-    public static void logOutAlert() throws IOException {
+    public static void logOutAlert()  {
         Alert confirmationAlert = new Alert((Alert.AlertType.CONFIRMATION));
         confirmationAlert.setTitle(bundle.getString("mainApplicationWidow.logOut.title"));
         confirmationAlert.setHeaderText(null);

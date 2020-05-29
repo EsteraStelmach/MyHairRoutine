@@ -89,49 +89,17 @@ public class User {
     }
 
     public void setHairTwistType(String hairTwistType)  {
-        this.hairTwistType=hairTwistType;
+        if(hairTwistType == null){
+            this.hairTwistType = " ";
+        }else {
+            this.hairTwistType = hairTwistType;
+        }
     }
 
     public void setHairPorosity(String hairPorosity)  {
         String porosityInDataBAse = UserUtils.convertHairPorosityString(hairPorosity);
         this.hairPorosity = porosityInDataBAse;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

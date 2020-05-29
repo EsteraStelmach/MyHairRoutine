@@ -1,5 +1,7 @@
 package Controllers;
 
+import dataBase.ShampoosUtils;
+import dataBase.StylizeUtils;
 import dataBase.UserUtils;
 import dataBase.domain.User;
 import Properties.MainApplicationWindowProperties;
@@ -8,10 +10,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import utils.EntityManagerUtils;
 import utils.DialogsUtils;
+import utils.MainApplicationProductsUtils;
 import utils.MainApplicationUtils;
 
 import javax.persistence.EntityManager;
@@ -20,11 +24,14 @@ import java.util.*;
 
 public class MainApplicationWindowController {
 
-
     @FXML
-    private TreeView<String> treeViewMyRoutine;
+    private Button addNewProduct;
     @FXML
-    private ComboBox <String> editComboBox;
+    private TextArea productsTextArea;
+    // @FXML
+    // private TreeView<String> treeViewMyRoutine;
+    @FXML
+    private ComboBox<String> editComboBox;
     @FXML
     private Label porosityLabel;
     @FXML
@@ -34,35 +41,51 @@ public class MainApplicationWindowController {
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         porosityLabel.setText(UserUtils.getHairPorosity());
         twistTypeLabel.setText(UserUtils.getHairTwistType());
         logEditInformationToChoiceBox();
-        this.treeViewMyRoutine.setRoot(MainApplicationUtils.getRoutineRoot());
-        this.productsTreeView.setRoot(MainApplicationUtils.getProductsRoot());
+        /// this.treeViewMyRoutine.setRoot(MainApplicationUtils.getRoutineRoot());
+        productsTreeView.setRoot(MainApplicationProductsUtils.getProductsRoot());
         addListerToEditComboBox();
+        //addListenerToProductsTreeView();
     }
 
-    private void addListerToEditComboBox(){
+    private void addListerToEditComboBox() {
         editComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 MainApplicationUtils.editInformation(newValue);
+                porosityLabel.setText(UserUtils.getHairPorosity());
+                twistTypeLabel.setText(UserUtils.getHairTwistType());
             }
         });
 
     }
 
-    private void logEditInformationToChoiceBox(){
+    private void logEditInformationToChoiceBox() {
         editComboBox.getItems().addAll(MainApplicationUtils.getInformationToEdit());
     }
 
-    public void logOutToLoginWindow() throws IOException {
+    public void logOutToLoginWindow(){
         DialogsUtils.logOutAlert();
     }
 
+    private void addListenerToProductsTreeView() {
+        //productsTreeView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>() {
+           // @Override
+            //public void changed(ObservableValue<? extends TreeItem<String>> observable, TreeItem<String> oldValue, TreeItem<String> newValue) {
+            //    productsTextArea.setText(MainApplicationProductsUtils.takeNotes(newValue));
+           // }
+       // });
+    }
 
+
+    public void addNewProduct() {
+        MainApplicationProductsUtils.showAddProductWindow();
+    }
 }
+
 
 
 

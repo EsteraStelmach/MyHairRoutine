@@ -18,12 +18,12 @@ import java.util.Optional;
 public class LoginWindowController {
 
 
-    private String loginWindowFxmlName = "/fxml/LoginWindow.fxml";
+    private static String loginWindowFxmlName = "/fxml/LoginWindow.fxml";
     private String registerWindowFxmlName = "/fxml/RegisterWindow.fxml";
     private String mainApplicationWindowFxml = "/fxml/MainApplicationWindow.fxml";
     private EntityManager  entityManager = EntityManagerUtils.getEntityManager();
 
-    private static Stage window;
+    private static Stage window = new Stage();
 
     @FXML
     private TextField loginText;
@@ -50,7 +50,7 @@ public class LoginWindowController {
         loginButton.disableProperty().bind(loginWindowProperties.loginButtonPropertyProperty());
     }
 
-    public Scene setLoginWindowScene() {
+    public static Scene setLoginWindowScene() {
         Scene scene= new Scene(fxmlUtils.fxmlLoader(loginWindowFxmlName));
         return scene;
 

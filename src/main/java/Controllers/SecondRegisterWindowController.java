@@ -52,11 +52,13 @@ public class SecondRegisterWindowController {
 
 
     public static ObservableList getHairPorosityList() {
+        hairPorosityList.clear();
         hairPorosityList.addAll(low,medium,high);
         return hairPorosityList;
     }
 
     public static ObservableList getHairTwistList() {
+        hairTwistList.clear();
         hairTwistList.addAll("2a","2b","2c","wurly","3a","3b","3c");
         return hairTwistList;
     }
@@ -64,10 +66,12 @@ public class SecondRegisterWindowController {
     private static ObservableList hairTwistList = FXCollections.observableArrayList();
 
     private void loadHairPorosityList(){
+        //choiceBoxHairPorosity.getItems().clear();
         choiceBoxHairPorosity.getItems().addAll(getHairPorosityList());
     }
 
     private void loadHairTwistList(){
+        //choiceBoxHairTwist.getItems().clear();
         choiceBoxHairTwist.getItems().addAll(getHairTwistList());
     }
 
@@ -77,18 +81,17 @@ public class SecondRegisterWindowController {
         UserUtils.setFoundUser(UserUtils.getLogin(),entityManager);
         UserUtils.setUserInformation();
         User user = UserUtils.getUser();
+        user.setFirstName(" ");
+        user.setLastName(" ");
         if(!(nameTextField.getText().isEmpty())) {
             user.setFirstName(nameTextField.getText());
         }
         if(!(lastNameTextField.getText().isEmpty())) {
             user.setLastName(lastNameTextField.getText());
         }
-        if(!(choiceBoxHairPorosity==null)) {
-            user.setHairPorosity(choiceBoxHairPorosity.getValue());
-        }
-        if(!(choiceBoxHairTwist==null)) {
-            user.setHairTwistType(choiceBoxHairTwist.getValue());
-        }
+        user.setHairPorosity(choiceBoxHairPorosity.getValue());
+        user.setHairTwistType(choiceBoxHairTwist.getValue());
+
         entityManager.getTransaction().commit();
         UserUtils.setFoundUser(UserUtils.getLogin(),entityManager);
         UserUtils.setUserInformation();

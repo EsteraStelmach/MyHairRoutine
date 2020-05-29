@@ -1,4 +1,5 @@
 package dataBase;
+import dataBase.domain.Products;
 import dataBase.domain.User;
 import dataBase.domain.UserHairRoutine;
 
@@ -19,7 +20,8 @@ public class UserUtils {
     private static String lastName;
     private static User user;
     private static List<User> foundUsers = new ArrayList<>();
-    private static UserHairRoutine userHairRoutine= new UserHairRoutine();
+    private static UserHairRoutine userHairRoutine = new UserHairRoutine();
+    private static ArrayList<Products> userProducts = new ArrayList<>();
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
 
@@ -92,7 +94,7 @@ public class UserUtils {
     }
 
     public static String getHairPorosity() {
-        String porosity=null;
+        String porosity=" ";
         if(hairPorosity.equals("L")){
             porosity= resourceBundle.getString("secondRegisterWindow.choiceBox.label.low");
         }else if(hairPorosity.equals("M")){
@@ -162,17 +164,11 @@ public class UserUtils {
     public static void setUserInformation() {
         user = foundUsers.get(0);
         hairPorosity = user.getHairPorosity();
-        System.out.println(hairPorosity);
         hairTwistType = user.getHairTwistType();
-        System.out.println(hairTwistType);
         name = user.getName();
-        System.out.println(name);
         lastName = user.getLastName();
-        System.out.println(lastName);
         password = user.getPassword();
-        System.out.println(password);
         id = user.getId();
-        System.out.println(id);
     }
     public static void setFoundUser(String login, EntityManager entityManager){
         foundUsers.clear();
@@ -192,7 +188,9 @@ public class UserUtils {
 
     public static String convertHairPorosityString(String hairPorosity){
         String porosity=null;
-        if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.low"))){
+        if(hairPorosity == null){
+            porosity = " ";
+        }else if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.low"))){
             porosity="L";
         }else if(hairPorosity.equals(resourceBundle.getString("secondRegisterWindow.choiceBox.label.medium"))){
             porosity="M";
