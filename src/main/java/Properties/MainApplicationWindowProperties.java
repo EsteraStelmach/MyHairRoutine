@@ -1,6 +1,9 @@
 package Properties;
 
-public class MainApplicationWindowProperties {
+import dataBase.UserUtils;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
+public class MainApplicationWindowProperties {
 
 }

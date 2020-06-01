@@ -25,9 +25,9 @@ import java.util.*;
 public class MainApplicationWindowController {
 
     @FXML
-    private Button addNewProduct;
+    private Button removeProductButton;
     @FXML
-    private TextArea productsTextArea;
+    private TextArea notesTextArea;
     // @FXML
     // private TreeView<String> treeViewMyRoutine;
     @FXML
@@ -48,17 +48,18 @@ public class MainApplicationWindowController {
         /// this.treeViewMyRoutine.setRoot(MainApplicationUtils.getRoutineRoot());
         productsTreeView.setRoot(MainApplicationProductsUtils.getProductsRoot());
         addListerToEditComboBox();
-        //addListenerToProductsTreeView();
+        addListenerToProductsTreeView();
+        addListenerToNotesTextArea();
+        removeProductButton.disableProperty().bindBidirectional(MainApplicationProductsUtils.removeProductButtonPropertyProperty());
+
+
     }
 
     private void addListerToEditComboBox() {
-        editComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                MainApplicationUtils.editInformation(newValue);
-                porosityLabel.setText(UserUtils.getHairPorosity());
-                twistTypeLabel.setText(UserUtils.getHairTwistType());
-            }
+        editComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            MainApplicationUtils.editInformation(newValue);
+            porosityLabel.setText(UserUtils.getHairPorosity());
+            twistTypeLabel.setText(UserUtils.getHairTwistType());
         });
 
     }
@@ -72,17 +73,25 @@ public class MainApplicationWindowController {
     }
 
     private void addListenerToProductsTreeView() {
-        //productsTreeView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>() {
-           // @Override
-            //public void changed(ObservableValue<? extends TreeItem<String>> observable, TreeItem<String> oldValue, TreeItem<String> newValue) {
-            //    productsTextArea.setText(MainApplicationProductsUtils.takeNotes(newValue));
-           // }
-       // });
+        productsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            notesTextArea.setText(MainApplicationProductsUtils.takeNotes(newValue));
+
+        });
     }
 
+    private void addListenerToNotesTextArea(){
+        notesTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            MainApplicationProductsUtils.changeNotes(newValue);
+        });
+    }
 
     public void addNewProduct() {
         MainApplicationProductsUtils.showAddProductWindow();
+    }
+
+    public void removeSelectedProduct() {
+        MainApplicationProductsUtils.removeProduct();
+        productsTreeView.setRoot(MainApplicationProductsUtils.getProductsRoot());
     }
 }
 

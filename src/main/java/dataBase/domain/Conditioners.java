@@ -5,7 +5,7 @@ import org.hibernate.cfg.annotations.reflection.XMLContext;
 import javax.persistence.*;
 
 @Entity
-public class Conditioners {
+public class Conditioners{
 
 
     @Id

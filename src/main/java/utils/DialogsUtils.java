@@ -74,6 +74,14 @@ public class DialogsUtils {
         }
     }
 
+    public static Alert removeProductAlert(String productName){
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle(bundle.getString("mainApplicationWindow.removeProductConfirmAlert.title"));
+        confirmationAlert.setHeaderText(null);
+        confirmationAlert.setContentText(bundle.getString("mainApplicationWindow.removeProductConfirmAlert.contentText")+" "+productName+"?");
+        return confirmationAlert;
+    }
+
     public static Dialog<String> editTextDialog(String value) {
         TextInputDialog dialog = new TextInputDialog(value);
         dialog.setHeaderText(null);

@@ -78,7 +78,7 @@ public class MainApplicationUtils {
             }
         } else if (chosenOption.equals(hairTwistType)) {
             choiceDialog = DialogsUtils.editChoiceBoxInformation(UserUtils.getHairTwistType(), twistList);
-            choiceDialog.setContentText(resourceBundle.getString("mainApplicationWindow.editChoiceBox.hairPorosity"));
+            choiceDialog.setContentText(resourceBundle.getString("mainApplicationWindow.editChoiceBox.hairTwistType"));
             Optional<String> result = choiceDialog.showAndWait();
             if (result.isPresent()) {
                 UserUtils.upDateUserTwistType(result.get(), entityManager);

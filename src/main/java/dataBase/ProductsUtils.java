@@ -2,6 +2,8 @@ package dataBase;
 
 import Controllers.AddProductController;
 import dataBase.domain.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import utils.EntityManagerUtils;
 
 import javax.persistence.EntityManager;
@@ -30,6 +32,8 @@ public class ProductsUtils {
     private static HalfProducts halfProduct;
 
     private static ResourceBundle bundle = ResourceBundle.getBundle("Bundles.messages");
+
+
 
     public static List<Products> getUserProducts(EntityManager entityManager){
         entityManager.getTransaction().begin();
