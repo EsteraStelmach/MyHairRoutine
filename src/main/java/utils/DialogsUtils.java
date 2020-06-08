@@ -50,7 +50,7 @@ public class DialogsUtils {
         informationAlert.show();
     }
 
-    public static void logOutAlert()  {
+    public static void logOutAlert() throws IOException {
         Alert confirmationAlert = new Alert((Alert.AlertType.CONFIRMATION));
         confirmationAlert.setTitle(bundle.getString("mainApplicationWidow.logOut.title"));
         confirmationAlert.setHeaderText(null);
@@ -66,11 +66,11 @@ public class DialogsUtils {
         Stage stage = LoginWindowController.getWindow();
 
         if (result.get() == button2) {
-            LoginWindowController loginWindow = new LoginWindowController();
-            stage.setScene(loginWindow.setLoginWindowScene());
+            stage.setScene(LoginWindowController.setLoginWindowScene());
             stage.show();
         } else if (result.get() == button3) {
             stage.close();
+            EntityManagerUtils.closeConnection();
         }
     }
 

@@ -92,7 +92,16 @@
     </Tab>
     <Tab text="%mainApplicationWindow.tap2">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0">
+               <children>
+                  <TableView fx:id="washTableView" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="346.0" prefWidth="575.0">
+                    <columns>
+                        <TableColumn fx:id="washNumberColumnMyRoutineTable" prefWidth="96.0" sortType="DESCENDING" text="%mainApplicationUtils.tableView.washNumberColumn" />
+                      <TableColumn fx:id="washTypeColumnMyRoutineTable" prefWidth="171.0" text="%mainApplicationUtils.tableView.washTypeColumn" />
+                      <TableColumn fx:id="washingDescriptionColumnMyRoutineTable" prefWidth="306.0" text="%mainApplicationUtils.tableView.washingDescriptionColumn" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
       </content>
     </Tab>
       <Tab text="%mainApplicationWindow.tap3">

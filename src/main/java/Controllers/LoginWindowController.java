@@ -2,6 +2,8 @@ package Controllers;
 
 import Properties.LoginWindowProperties;
 import dataBase.UserUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import utils.EntityManagerUtils;
 import utils.DialogsUtils;
 import javafx.fxml.FXML;
@@ -13,7 +15,9 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import utils.fxmlUtils;
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class LoginWindowController {
 
@@ -50,7 +54,7 @@ public class LoginWindowController {
         loginButton.disableProperty().bind(loginWindowProperties.loginButtonPropertyProperty());
     }
 
-    public static Scene setLoginWindowScene() {
+    public static Scene setLoginWindowScene()  {
         Scene scene= new Scene(fxmlUtils.fxmlLoader(loginWindowFxmlName));
         return scene;
 

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import utils.fxmlUtils;
 
 import javax.persistence.EntityManager;
+import java.io.IOException;
 
 
 public class RegisterWindowController{
@@ -34,7 +35,6 @@ public class RegisterWindowController{
     private User user = new User();
 
     private RegisterWindowProperties registerWindowProperties = new RegisterWindowProperties();
-    private LoginWindowController loginWindow = new LoginWindowController();
 
 
     @FXML
@@ -92,9 +92,9 @@ public class RegisterWindowController{
     }
 
 
-   public void backToLoginWindow()  {
+   public void backToLoginWindow() throws IOException {
         Stage window = (Stage) backButton.getScene().getWindow();
-        window.setScene(loginWindow.setLoginWindowScene());
+        window.setScene(LoginWindowController.setLoginWindowScene());
         window.show();
     }
 }

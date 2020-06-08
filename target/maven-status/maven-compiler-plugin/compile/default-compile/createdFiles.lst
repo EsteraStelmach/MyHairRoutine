@@ -7,7 +7,6 @@ utils\EntityManagerUtils.class
 dataBase\domain\User.class
 Properties\LoginWindowProperties.class
 utils\DialogsUtils.class
-Controllers\MainApplicationWindowController$1.class
 Controllers\SecondRegisterWindowController.class
 Controllers\LoginWindowController.class
 Controllers\MainApplicationWindowController.class

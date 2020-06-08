@@ -17,6 +17,7 @@ public class HalfProductsUtils {
     private static List<HalfProducts>  allHafProducts = new ArrayList<>();
 
     public static List<HalfProducts> getHumectantsHafProducts(EntityManager entityManager) {
+        humectantsHafProducts.clear();
         getAllHafProducts(entityManager);
         for(HalfProducts halfProducts:allHafProducts){
             if(halfProducts.getType().equals("H")){
@@ -27,6 +28,7 @@ public class HalfProductsUtils {
     }
 
     public static List<HalfProducts> getProteinHafProducts(EntityManager entityManager) {
+        proteinHafProducts.clear();
         getAllHafProducts(entityManager);
         for(HalfProducts halfProducts:allHafProducts){
             if(halfProducts.getType().equals("P")){
@@ -37,6 +39,7 @@ public class HalfProductsUtils {
     }
 
     public static List<HalfProducts> getEmollientsHafProducts(EntityManager entityManager) {
+        emollientsHafProducts.clear();
         getAllHafProducts(entityManager);
         for(HalfProducts halfProducts:allHafProducts){
             if(halfProducts.getType().equals("E")){

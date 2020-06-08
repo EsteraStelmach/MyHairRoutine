@@ -2,6 +2,7 @@ package dataBase.domain;
 
 import dataBase.UserUtils;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -11,9 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "iduser")
     private  int id;
-    @OneToOne
+    @OneToMany
     @JoinColumn
-    private UserHairRoutine userHairRoutine;
+    private List<WashRoutine> washRoutineList;
     private String login;
     private String password;
     @Column(name = "firstname")
@@ -25,16 +26,10 @@ public class User {
     @Column(name = "hairporosity")
     private String hairPorosity;
 
+
     public User()  {
     }
 
-    public UserHairRoutine getUserHairRoutine() {
-        return userHairRoutine;
-    }
-
-    public void setUserHairRoutine(UserHairRoutine userHairRoutine) {
-        this.userHairRoutine = userHairRoutine;
-    }
 
     public int getId() {
         return id;
@@ -101,5 +96,11 @@ public class User {
         this.hairPorosity = porosityInDataBAse;
     }
 
+    public List<WashRoutine> getWashRoutineList() {
+        return washRoutineList;
+    }
 
+    public void setWashRoutineList(List<WashRoutine> washRoutineList) {
+        this.washRoutineList = washRoutineList;
+    }
 }

@@ -23,23 +23,10 @@ import java.util.ResourceBundle;
 
 public class MainApplicationUtils {
 
-    private static TreeItem<String> routineRoot = new TreeItem<>();
-
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
 
     private static ObservableList<String> washNames = FXCollections.observableArrayList();
     private static EntityManager entityManager = EntityManagerUtils.getEntityManager();
-
-    private static String wash1 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was1");
-    private static String wash2 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was2");
-    private static String wash3 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was3");
-    private static String wash4 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was4");
-    private static String wash5 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was5");
-    private static String wash6 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was6");
-    private static String wash7 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was7");
-    private static String wash8 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was8");
-    private static String wash9 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was9");
-    private static String wash10 = resourceBundle.getString("mainApplicationUtils.washTreeItem.was10");
 
 
     private static String login = resourceBundle.getString("registerWindow.labelLogin");
@@ -57,14 +44,6 @@ public class MainApplicationUtils {
         informationToEdit.addAll(login, lastName, password, name, hairPorosity, hairTwistType);
         return informationToEdit;
     }
-
-
-    public static TreeItem<String> getRoutineRoot() {
-        initRoutineRoot();
-        return routineRoot;
-    }
-
-
 
     private static void choiceDialogForEditInformation(String chosenOption) {
 
@@ -130,14 +109,6 @@ public class MainApplicationUtils {
         }
     }
 
-    private static void initRoutineRoot() {
-        washNames.addAll(wash1, wash2, wash3, wash4, wash5, wash6, wash7, wash8, wash9, wash10);
-        for (String wash : washNames) {
-            TreeItem<String> washItem = new TreeItem<>(wash);
-            routineRoot.getChildren().add(washItem);
-        }
-
-    }
 
 
 }

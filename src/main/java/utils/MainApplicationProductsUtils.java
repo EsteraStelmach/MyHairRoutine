@@ -39,7 +39,7 @@ public class MainApplicationProductsUtils {
     private static TreeItem<String> gelStylize = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.stylizeTreeItem.gelStylize"));
     private static TreeItem<String> creamStylize = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.stylizeTreeItem.creamStylize"));
     private static TreeItem<String> foamStylize = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.stylizeTreeItem.foamStylize"));
-    private static TreeItem<String> humectantsHalfProducts= new TreeItem<>(resourceBundle.getString("mainApplicationUtils.conditionerTreeItem.humectants"));
+    private static TreeItem<String> humectantsHalfProducts = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.conditionerTreeItem.humectants"));
     private static TreeItem<String> proteinHalfProducts = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.conditionerTreeItem.protein"));
     private static TreeItem<String> emollientsHalfProducts = new TreeItem<>(resourceBundle.getString("mainApplicationUtils.conditionerTreeItem.emollients"));
 
@@ -73,12 +73,27 @@ public class MainApplicationProductsUtils {
         oilItem.getChildren().clear();
         stylizeItem.getChildren().clear();
         halfProductsItem.getChildren().clear();
+        strongLevelItem.getChildren().clear();
+        mildLevelItem.getChildren().clear();
+        allStylize.getChildren().clear();
+        gelStylize.getChildren().clear();
+        foamStylize.getChildren().clear();
+        creamStylize.getChildren().clear();
+        humectantsHalfProducts.getChildren().clear();
+        emollientsHalfProducts.getChildren().clear();
+        proteinHalfProducts.getChildren().clear();
+        allConditionersItem.getChildren().clear();
+        humectantsConditionersItem.getChildren().clear();
+        emollientsConditionersItem.getChildren().clear();
+        proteinConditionersItem.getChildren().clear();
+        coWashConditionersItem.getChildren().clear();
+        leaveOnConditionersItem.getChildren().clear();
         initShampoosRoot();
         initConditionersRoot();
         initOilsRoot();
         initStylizeRoot();
         initHalfProductsRoot();
-        productsRoot.getChildren().addAll(shampoosItem,conditionersItem,stylizeItem,oilItem,halfProductsItem );
+        productsRoot.getChildren().addAll(shampoosItem, conditionersItem, stylizeItem, oilItem, halfProductsItem);
 
     }
 
@@ -99,47 +114,46 @@ public class MainApplicationProductsUtils {
     }
 
     private static void initStylizeRoot() {
-        for(Stylize stylize: StylizeUtils.getAllStylize(entityManager)){
+        for (Stylize stylize : StylizeUtils.getAllStylize(entityManager)) {
             allStylize.getChildren().add(new TreeItem<>(stylize.getName()));
         }
-        for(Stylize stylize :StylizeUtils.getGelStylize(entityManager)){
+        for (Stylize stylize : StylizeUtils.getGelStylize(entityManager)) {
             gelStylize.getChildren().add(new TreeItem<>(stylize.getName()));
         }
-        for(Stylize stylize :StylizeUtils.getCreamStylize(entityManager)){
+        for (Stylize stylize : StylizeUtils.getCreamStylize(entityManager)) {
             creamStylize.getChildren().add(new TreeItem<>(stylize.getName()));
         }
-        for(Stylize stylize :StylizeUtils.getFoamStylize(entityManager)){
+        for (Stylize stylize : StylizeUtils.getFoamStylize(entityManager)) {
             foamStylize.getChildren().add(new TreeItem<>(stylize.getName()));
         }
-        stylizeItem.getChildren().addAll(allStylize,gelStylize,creamStylize,foamStylize);
+        stylizeItem.getChildren().addAll(allStylize, gelStylize, creamStylize, foamStylize);
 
 
     }
 
-    private static void initHalfProductsRoot(){
-        for(HalfProducts halfProducts: HalfProductsUtils.getHumectantsHafProducts(entityManager)){
+    private static void initHalfProductsRoot() {
+        for (HalfProducts halfProducts : HalfProductsUtils.getHumectantsHafProducts(entityManager)) {
             humectantsHalfProducts.getChildren().add(new TreeItem<>(halfProducts.getName()));
         }
-        for(HalfProducts halfProducts: HalfProductsUtils.getProteinHafProducts(entityManager)){
+        for (HalfProducts halfProducts : HalfProductsUtils.getProteinHafProducts(entityManager)) {
             proteinHalfProducts.getChildren().add(new TreeItem<>(halfProducts.getName()));
         }
-        for(HalfProducts halfProducts: HalfProductsUtils.getEmollientsHafProducts(entityManager)){
+        for (HalfProducts halfProducts : HalfProductsUtils.getEmollientsHafProducts(entityManager)) {
             emollientsHalfProducts.getChildren().add(new TreeItem<>(halfProducts.getName()));
         }
-        halfProductsItem.getChildren().addAll(humectantsHalfProducts,proteinHalfProducts,emollientsHalfProducts);
+        halfProductsItem.getChildren().addAll(humectantsHalfProducts, proteinHalfProducts, emollientsHalfProducts);
     }
 
-    private static void initOilsRoot(){
-        for(Oils oil:OilsUtils.getAllOils(entityManager)){
+    private static void initOilsRoot() {
+        for (Oils oil : OilsUtils.getAllOils(entityManager)) {
             oilItem.getChildren().add(new TreeItem<>(oil.getName()));
         }
 
     }
 
 
-
     private static void initConditionersRoot() {
-        for (Conditioners conditioner : ConditionersUtils.getAllConditioners(entityManager)){
+        for (Conditioners conditioner : ConditionersUtils.getAllConditioners(entityManager)) {
             allConditionersItem.getChildren().add(new TreeItem<>(conditioner.getName()));
         }
         for (Conditioners conditioner : ConditionersUtils.getEmollientsConditioners(entityManager)) {
@@ -161,12 +175,12 @@ public class MainApplicationProductsUtils {
             leaveOnConditionersItem.getChildren().add(new TreeItem<>(conditioner.getName()));
 
         }
-        conditionersItem.getChildren().addAll(allConditionersItem,emollientsConditionersItem,humectantsConditionersItem,proteinConditionersItem,
-                coWashConditionersItem,leaveOnConditionersItem);
+        conditionersItem.getChildren().addAll(allConditionersItem, emollientsConditionersItem, humectantsConditionersItem, proteinConditionersItem,
+                coWashConditionersItem, leaveOnConditionersItem);
 
     }
 
-    public static void showAddProductWindow(){
+    public static void showAddProductWindow() {
         Scene addProductScene = new Scene(fxmlUtils.fxmlLoader("/fxml/AddProduct.fxml"));
         Stage stage = new Stage();
         stage.setScene(addProductScene);
@@ -179,13 +193,13 @@ public class MainApplicationProductsUtils {
             removeProductButtonProperty.setValue(true);
             return notes = " ";
 
-        }else {
+        } else {
             removeProductButtonProperty.setValue(false);
             return notes;
         }
     }
 
-    private static boolean searchProduct(TreeItem<String> newValue){
+    private static boolean searchProduct(TreeItem<String> newValue) {
         boolean isProductClicked = false;
         for (Shampoos shampoo : ShampoosUtils.getAllShampoos(entityManager)) {
             if ((newValue.getValue()).equals(shampoo.getName())) {
@@ -197,18 +211,18 @@ public class MainApplicationProductsUtils {
                 isProductClicked = true;
             }
         }
-        for(Conditioners conditioner : ConditionersUtils.getAllConditioners(entityManager)){
-            if(newValue.getValue().equals(conditioner.getName())){
-                notes=conditioner.getNotes();
+        for (Conditioners conditioner : ConditionersUtils.getAllConditioners(entityManager)) {
+            if (newValue.getValue().equals(conditioner.getName())) {
+                notes = conditioner.getNotes();
                 helpString_Category = "C";
                 helpInt_id = conditioner.getId();
-                helpString_productName =conditioner.getName();
+                helpString_productName = conditioner.getName();
                 helpObject = conditioner;
                 isProductClicked = true;
             }
         }
-        for(HalfProducts halfProducts : HalfProductsUtils.getAllHafProducts(entityManager)){
-            if(newValue.getValue().equals(halfProducts.getName())){
+        for (HalfProducts halfProducts : HalfProductsUtils.getAllHafProducts(entityManager)) {
+            if (newValue.getValue().equals(halfProducts.getName())) {
                 notes = halfProducts.getNotes();
                 helpString_Category = "H";
                 helpInt_id = halfProducts.getId();
@@ -217,8 +231,8 @@ public class MainApplicationProductsUtils {
                 isProductClicked = true;
             }
         }
-        for(Oils oil : OilsUtils.getAllOils(entityManager)){
-            if(newValue.getValue().equals(oil.getName())){
+        for (Oils oil : OilsUtils.getAllOils(entityManager)) {
+            if (newValue.getValue().equals(oil.getName())) {
                 notes = oil.getNotes();
                 helpString_Category = "O";
                 helpInt_id = oil.getId();
@@ -227,8 +241,8 @@ public class MainApplicationProductsUtils {
                 isProductClicked = true;
             }
         }
-        for(Stylize stylize : StylizeUtils.getAllStylize(entityManager)){
-            if(newValue.getValue().equals(stylize.getName())){
+        for (Stylize stylize : StylizeUtils.getAllStylize(entityManager)) {
+            if (newValue.getValue().equals(stylize.getName())) {
                 notes = stylize.getNotes();
                 helpString_Category = "ST";
                 helpInt_id = stylize.getId();
@@ -237,39 +251,39 @@ public class MainApplicationProductsUtils {
                 isProductClicked = true;
             }
         }
-        return  isProductClicked;
+        return isProductClicked;
     }
 
-    public static void changeNotes(String newValue){
+    public static void changeNotes(String newValue) {
         entityManager.getTransaction().begin();
-        if(helpString_Category.equals("S")){
-           Shampoos shampoo = entityManager.find(Shampoos.class,helpInt_id);
-           shampoo.setNotes(newValue);
-        }else if(helpString_Category.equals("C")){
-            Conditioners conditioner = entityManager.find(Conditioners.class,helpInt_id);
+        if (helpString_Category.equals("S")) {
+            Shampoos shampoo = entityManager.find(Shampoos.class, helpInt_id);
+            shampoo.setNotes(newValue);
+        } else if (helpString_Category.equals("C")) {
+            Conditioners conditioner = entityManager.find(Conditioners.class, helpInt_id);
             conditioner.setNotes(newValue);
-        }else if(helpString_Category.equals("ST")){
-            Stylize stylize = entityManager.find(Stylize.class,helpInt_id);
+        } else if (helpString_Category.equals("ST")) {
+            Stylize stylize = entityManager.find(Stylize.class, helpInt_id);
             stylize.setNotes(newValue);
-        }else if(helpString_Category.equals("O")){
-            Oils oil = entityManager.find(Oils.class,helpInt_id);
+        } else if (helpString_Category.equals("O")) {
+            Oils oil = entityManager.find(Oils.class, helpInt_id);
             oil.setNotes(newValue);
-        }else if(helpString_Category.equals("H")){
-            HalfProducts halfProduct = entityManager.find(HalfProducts.class,helpInt_id);
+        } else if (helpString_Category.equals("H")) {
+            HalfProducts halfProduct = entityManager.find(HalfProducts.class, helpInt_id);
             halfProduct.setNotes(newValue);
         }
         entityManager.getTransaction().commit();
 
     }
 
-    public static void removeProduct(){
+    public static void removeProduct() {
         Alert confirmationAlert = DialogsUtils.removeProductAlert(helpString_productName);
         Optional<ButtonType> result = confirmationAlert.showAndWait();
         Products helpProduct = null;
-        if(result.get() == ButtonType.OK) {
+        if (result.get() == ButtonType.OK) {
             List<Products> allUserProducts = ProductsUtils.getUserProducts(entityManager);
-            for(Products product : allUserProducts){
-                if(product.getIdProduct() == helpInt_id){
+            for (Products product : allUserProducts) {
+                if (product.getIdProduct() == helpInt_id) {
                     helpProduct = product;
                 }
             }
@@ -279,12 +293,5 @@ public class MainApplicationProductsUtils {
             entityManager.getTransaction().commit();
         }
     }
-
-
-
-
-
 }
-
-
-
+ 

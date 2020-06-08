@@ -1,7 +1,7 @@
 package dataBase;
 import dataBase.domain.Products;
 import dataBase.domain.User;
-import dataBase.domain.UserHairRoutine;
+import dataBase.domain.WashRoutine;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -19,18 +19,17 @@ public class UserUtils {
     private static String name;
     private static String lastName;
     private static User user;
+    private static List<WashRoutine> washRoutineList = new ArrayList<>();
     private static List<User> foundUsers = new ArrayList<>();
-    private static UserHairRoutine userHairRoutine = new UserHairRoutine();
-    private static ArrayList<Products> userProducts = new ArrayList<>();
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
 
-    public static UserHairRoutine getUserHairRoutine() {
-        return userHairRoutine;
+    public static List<WashRoutine> getWashRoutineList() {
+        return washRoutineList;
     }
 
-    public static void setUserHairRoutine(UserHairRoutine userHairRoutine) {
-        UserUtils.userHairRoutine = userHairRoutine;
+    public static void setWashRoutineList(List<WashRoutine> washRoutineList) {
+        UserUtils.washRoutineList = washRoutineList;
     }
 
     public static List<User> getFoundUsers() {
@@ -169,6 +168,8 @@ public class UserUtils {
         lastName = user.getLastName();
         password = user.getPassword();
         id = user.getId();
+        washRoutineList = user.getWashRoutineList();
+
     }
     public static void setFoundUser(String login, EntityManager entityManager){
         foundUsers.clear();
@@ -180,9 +181,12 @@ public class UserUtils {
     }
 
     public static void persistUser(User user,EntityManager entityManager){
+        washRoutineList = WashRoutineUtils.createDefaultWashRoutineForBeginning(entityManager);
+        user.setWashRoutineList(washRoutineList);
        entityManager.persist(user);
-       entityManager.persist(userHairRoutine);
-       user.setUserHairRoutine(userHairRoutine);
+       for(WashRoutine wash:washRoutineList){
+           entityManager.persist(wash);
+       }
 
     }
 

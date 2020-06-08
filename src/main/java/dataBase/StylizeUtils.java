@@ -19,6 +19,7 @@ public class StylizeUtils {
 
 
     public static List<Stylize> getGelStylize(EntityManager entityManager) {
+        gelStylize.clear();
         getAllStylize(entityManager);
         for(Stylize stylize:allStylize){
             if((stylize.getConsistency()).equals("G")){
@@ -29,9 +30,10 @@ public class StylizeUtils {
     }
 
     public static List<Stylize> getCreamStylize(EntityManager entityManager) {
+        creamStylize.clear();
         getAllStylize(entityManager);
         for(Stylize stylize:allStylize){
-            if((stylize.getConsistency()).equals("K")){
+            if((stylize.getConsistency()).equals("C")){
                 creamStylize.add(stylize);
             }
         }
@@ -39,9 +41,10 @@ public class StylizeUtils {
     }
 
     public static List<Stylize> getFoamStylize(EntityManager entityManager) {
+        foamStylize.clear();
         getAllStylize(entityManager);
         for(Stylize stylize:allStylize){
-            if((stylize.getConsistency()).equals("P")){
+            if((stylize.getConsistency()).equals("F")){
                 foamStylize.add(stylize);
             }
         }

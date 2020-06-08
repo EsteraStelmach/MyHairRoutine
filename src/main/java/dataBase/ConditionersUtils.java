@@ -20,6 +20,7 @@ public class ConditionersUtils {
 
 
     public static List<Conditioners> getEmollientsConditioners(EntityManager entityManager) {
+        emollientsConditioners.clear();
         getAllConditioners(entityManager);
         for(Conditioners conditioner: allConditioners){
             if(conditioner.getType().equals("E")){
@@ -30,6 +31,7 @@ public class ConditionersUtils {
     }
 
     public static List<Conditioners> getHumectantsConditioners(EntityManager entityManager) {
+        humectantsConditioners.clear();
         getAllConditioners(entityManager);
         for(Conditioners conditioner: allConditioners){
             if(conditioner.getType().equals("H")){
@@ -40,6 +42,7 @@ public class ConditionersUtils {
     }
 
     public static List<Conditioners> getProteinConditioners(EntityManager entityManager) {
+        proteinConditioners.clear();
         getAllConditioners(entityManager);
         for(Conditioners conditioner: allConditioners){
             if(conditioner.getType().equals("P")){
@@ -50,6 +53,7 @@ public class ConditionersUtils {
     }
 
     public static List<Conditioners> getCoWashConditioners(EntityManager entityManager) {
+        coWashConditioners.clear();
         getAllConditioners(entityManager);
         for(Conditioners conditioner: allConditioners){
             if(conditioner.getCoWash().equals("1")){
@@ -60,6 +64,7 @@ public class ConditionersUtils {
     }
 
     public static List<Conditioners> getLeaveOnConditioners(EntityManager entityManager) {
+        leaveOnConditioners.clear();
         getAllConditioners(entityManager);
         for(Conditioners conditioner: allConditioners){
             if(conditioner.getLeaveOn().equals("1")){

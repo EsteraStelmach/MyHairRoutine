@@ -18,6 +18,7 @@ public class ShampoosUtils {
 
 
     public static List<Shampoos> getHardShampoos(EntityManager entityManager){
+        hardShampoos.clear();
         getAllShampoos(entityManager);
         for(Shampoos shampoo: allShampoos) {
             if (shampoo.getStrongLevel().equals("H")) {
@@ -28,6 +29,7 @@ public class ShampoosUtils {
     }
 
     public static List<Shampoos> getMildShampoos(EntityManager entityManager){
+        mildShampoos.clear();
         getAllShampoos(entityManager);
         for(Shampoos shampoo: allShampoos){
             if(shampoo.getStrongLevel().equals("M")){

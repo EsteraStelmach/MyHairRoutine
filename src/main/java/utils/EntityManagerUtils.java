@@ -7,12 +7,17 @@ import javax.persistence.Persistence;
 
 public class EntityManagerUtils {
 
-    private static EntityManager entityManager;
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MyRoutine");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public static EntityManager getEntityManager() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MyRoutine");
-        entityManager = entityManagerFactory.createEntityManager();
         return entityManager;
+    }
+
+    public static void closeConnection(){
+        entityManager.close();
+        entityManagerFactory.close();
+
     }
 
 
