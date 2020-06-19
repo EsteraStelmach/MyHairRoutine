@@ -23,13 +23,12 @@ Each user has his account to which he logs in.
 
 *JavaFx Scene Builder
 
-<img src="ApplicationImages/LoginWindow.PNG" widh="100" >
 
-![](ApplicationImages/LoginWindow.PNG)
+![](src/main/resources/ApplicationImages/LoginWindow.PNG)
 
-![](ApplicationImages/Application.PNG)
+![](src/main/resources/ApplicationImages/Application.PNG)
 
-![](ApplicationImages/ProductsWindow.PNG)
+![](src/main/resources/ApplicationImages/ProductsWindow.PNG)
 
-![](ApplicationImages/AddNewProduct.PNG)
+![](src/main/resources/ApplicationImages/AddNewProduct.PNG)
 
