@@ -7,6 +7,8 @@ import dataBase.WashRoutineUtils;
 import dataBase.domain.User;
 import Properties.MainApplicationWindowProperties;
 import dataBase.domain.WashRoutine;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -45,6 +47,22 @@ public class MainApplicationWindowController {
     private Label twistTypeLabel;
     @FXML
     private TreeView<String> productsTreeView;
+    @FXML
+    private Button removeRoutineWashButton;
+
+    private EntityManager entityManager = EntityManagerUtils.getEntityManager();
+
+    public TableColumn<WashRoutine, String> getWashNumberColumnMyRoutineTable() {
+        return washNumberColumnMyRoutineTable;
+    }
+
+    public TableColumn<WashRoutine, String> getWashTypeColumnMyRoutineTable() {
+        return washTypeColumnMyRoutineTable;
+    }
+
+    public TableColumn<WashRoutine, String> getWashingDescriptionColumnMyRoutineTable() {
+        return washingDescriptionColumnMyRoutineTable;
+    }
 
     @FXML
     public void initialize() {
@@ -56,9 +74,30 @@ public class MainApplicationWindowController {
         addListenerToProductsTreeView();
         addListenerToNotesTextArea();
         removeProductButton.disableProperty().bindBidirectional(MainApplicationProductsUtils.removeProductButtonPropertyProperty());
+        loadInformationToWashRoutineTable();
+        removeRoutineWashButton.disableProperty().bindBidirectional(removeRoutineWashDisableProperty());
+
+    }
+
+    private BooleanProperty removeRoutineWashDisableProperty(){//zmienic pozniej jak zrobie edit
+        BooleanProperty removeRoutineWashProperty = new SimpleBooleanProperty(true);
+        if(washTableView.getSelectionModel().getSelectedItem()!=null){
+            removeRoutineWashProperty.setValue(false);
+        }
+        return removeRoutineWashProperty;
+    }
+
+
+
+    private void loadInformationToWashRoutineTable(){
+        washTableView.setEditable(true);
         washNumberColumnMyRoutineTable.setCellValueFactory(new PropertyValueFactory("numberWash"));
-        MainApplicationMyWashRoutineUtils.makeWashingDescriptionColumnMyRoutineTable(washTypeColumnMyRoutineTable,"washType");
-        MainApplicationMyWashRoutineUtils.makeWashingDescriptionColumnMyRoutineTable(washingDescriptionColumnMyRoutineTable,"washingDescription");
+        washTypeColumnMyRoutineTable.setCellValueFactory(new PropertyValueFactory("washType"));
+        washingDescriptionColumnMyRoutineTable.setCellValueFactory(new PropertyValueFactory("washingDescription"));
+        MainApplicationMyWashRoutineUtils.makeColumnMyRoutineTable(washingDescriptionColumnMyRoutineTable);
+        MainApplicationMyWashRoutineUtils.makeColumnMyRoutineTable(washTypeColumnMyRoutineTable);
+        MainApplicationMyWashRoutineUtils.makeColumnMyRoutineTable(washNumberColumnMyRoutineTable);
+
         washTableView.setItems(MainApplicationMyWashRoutineUtils.getWashRoutinesObservableList());
     }
 
@@ -100,6 +139,25 @@ public class MainApplicationWindowController {
     public void removeSelectedProduct() {
         MainApplicationProductsUtils.removeProduct();
         productsTreeView.setRoot(MainApplicationProductsUtils.getProductsRoot());
+    }
+
+    public void addWashRoutine() {
+        MainApplicationMyWashRoutineUtils.addWashRoutine(entityManager);
+        loadInformationToWashRoutineTable();
+
+    }
+
+    public void removeSelectedWash() {
+        WashRoutine washRoutine = washTableView.getSelectionModel().getSelectedItem();
+        UserUtils.removeUserWashRoutine(washRoutine,entityManager);
+        loadInformationToWashRoutineTable();
+
+    }
+
+
+    public void editWashingDescription(TableColumn.CellEditEvent<WashRoutine, String> washRoutineStringCellEditEvent) {
+        WashRoutine washRoutine = washTableView.getSelectionModel().getSelectedItem();
+        //washRoutine.setWashingDescription(washRoutineStringCellEditEvent.getNewValue());
     }
 }
 

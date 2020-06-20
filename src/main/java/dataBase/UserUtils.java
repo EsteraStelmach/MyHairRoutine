@@ -19,12 +19,13 @@ public class UserUtils {
     private static String name;
     private static String lastName;
     private static User user;
-    private static List<WashRoutine> washRoutineList = new ArrayList<>();
+    private static List<WashRoutine> washRoutineList;
     private static List<User> foundUsers = new ArrayList<>();
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
 
     public static List<WashRoutine> getWashRoutineList() {
+        washRoutineList = user.getWashRoutineList();
         return washRoutineList;
     }
 
@@ -90,6 +91,19 @@ public class UserUtils {
 
     public static void setHairTwistType(String hairTwistType) {
         UserUtils.hairTwistType = hairTwistType;
+    }
+
+
+    public static void addNewWash(String washType,String washingDescription,EntityManager entityManager){
+        int number = UserUtils.getWashRoutineList().size()+1;
+        String washNumber = resourceBundle.getString("mainApplicationUtils.washRoutineTableView.wash")+" " + number;
+        WashRoutine washRoutine = WashRoutineUtils.createNewWash(washNumber,washType,washingDescription);
+        user.getWashRoutineList().add(washRoutine);
+        entityManager.getTransaction().begin();
+        entityManager.persist(washRoutine);
+        entityManager.getTransaction().commit();
+        entityManager.refresh(user);
+
     }
 
     public static String getHairPorosity() {
@@ -202,6 +216,14 @@ public class UserUtils {
             porosity="H";
         }
         return porosity;
+    }
+
+    public static void removeUserWashRoutine(WashRoutine washRoutine,EntityManager entityManager){
+        user.getWashRoutineList().remove(washRoutine);
+        entityManager.getTransaction().begin();
+        entityManager.remove(washRoutine);
+        entityManager.getTransaction().commit();
+        entityManager.refresh(UserUtils.getUser());
     }
 
 

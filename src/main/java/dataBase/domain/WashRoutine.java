@@ -50,4 +50,32 @@ public class WashRoutine {
     public void setWashingDescription(String washingDescription) {
         this.washingDescription = washingDescription;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

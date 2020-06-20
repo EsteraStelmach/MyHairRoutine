@@ -58,9 +58,6 @@ public class MainApplicationProductsUtils {
     private static String helpString_productName;
     private static Object helpObject;
 
-    public static boolean isRemoveProductButtonProperty() {
-        return removeProductButtonProperty.get();
-    }
 
     public static BooleanProperty removeProductButtonPropertyProperty() {
         return removeProductButtonProperty;

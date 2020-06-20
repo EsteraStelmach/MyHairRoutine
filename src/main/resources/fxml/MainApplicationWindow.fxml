@@ -94,13 +94,15 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="150.0">
                <children>
-                  <TableView fx:id="washTableView" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="346.0" prefWidth="575.0">
+                  <TableView fx:id="washTableView" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="301.0" prefWidth="579.0">
                     <columns>
-                        <TableColumn fx:id="washNumberColumnMyRoutineTable" prefWidth="96.0" sortType="DESCENDING" text="%mainApplicationUtils.tableView.washNumberColumn" />
-                      <TableColumn fx:id="washTypeColumnMyRoutineTable" prefWidth="171.0" text="%mainApplicationUtils.tableView.washTypeColumn" />
-                      <TableColumn fx:id="washingDescriptionColumnMyRoutineTable" prefWidth="306.0" text="%mainApplicationUtils.tableView.washingDescriptionColumn" />
+                        <TableColumn fx:id="washNumberColumnMyRoutineTable" onEditCommit="#editWashingDescription" prefWidth="96.0" sortType="DESCENDING" text="%mainApplicationUtils.tableView.washNumberColumn" />
+                      <TableColumn fx:id="washTypeColumnMyRoutineTable" prefWidth="150.0" text="%mainApplicationUtils.tableView.washTypeColumn" />
+                      <TableColumn fx:id="washingDescriptionColumnMyRoutineTable" prefWidth="327.0" text="%mainApplicationUtils.tableView.washingDescriptionColumn" />
                     </columns>
                   </TableView>
+                  <Button layoutX="239.0" layoutY="332.0" mnemonicParsing="false" onAction="#addWashRoutine" prefHeight="25.0" prefWidth="154.0" text="%mainApplicationWindow.washRoutine.addWashRoutineButton" />
+                  <Button fx:id="removeRoutineWashButton" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" onAction="#removeSelectedWash" prefHeight="25.0" prefWidth="177.0" text="%mainApplicationWindow.washRoutine.removeWashRoutineButton" />
                </children></AnchorPane>
       </content>
     </Tab>

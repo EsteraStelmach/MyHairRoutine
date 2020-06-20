@@ -1,9 +1,11 @@
 package dataBase;
 
+import Controllers.MainApplicationWindowController;
 import dataBase.domain.WashRoutine;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
@@ -15,6 +17,7 @@ import java.util.ResourceBundle;
 public class WashRoutineUtils {
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("Bundles.messages");
+    private static MainApplicationWindowController mainApplicationWindowController = new MainApplicationWindowController();
 
     public static List<WashRoutine> createDefaultWashRoutineForBeginning(EntityManager entityManager){
         List<WashRoutine> defaultWashRoutines = new ArrayList<>();
@@ -45,6 +48,39 @@ public class WashRoutineUtils {
         return defaultWashRoutines;
 
     }
+
+    public static WashRoutine createNewWash(String washNumber,String washType,String washingDescription){
+        WashRoutine newWashRoutine = new WashRoutine();
+        newWashRoutine.setNumberWash(washNumber);
+        newWashRoutine.setWashType(washType);
+        newWashRoutine.setWashingDescription(washingDescription);
+        return newWashRoutine;
+    }
+
+    public static void upDateWashRoutine(TableCell<WashRoutine,String> cell,String newValue, EntityManager entityManager){
+        TableColumn tableColumn = cell.getTableColumn();
+        WashRoutine washRoutine = cell.getTableView().getSelectionModel().getSelectedItem();
+        if(tableColumn.equals(mainApplicationWindowController.getWashingDescriptionColumnMyRoutineTable())){
+            washRoutine.setWashingDescription(newValue);
+        }else if(tableColumn.equals(mainApplicationWindowController.getWashTypeColumnMyRoutineTable())){
+            washRoutine.setWashType(newValue);
+        }else if(tableColumn.equals(mainApplicationWindowController.getWashNumberColumnMyRoutineTable())){
+            washRoutine.setNumberWash(newValue);
+        }
+        entityManager.refresh(washRoutine);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

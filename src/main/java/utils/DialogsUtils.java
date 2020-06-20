@@ -85,6 +85,7 @@ public class DialogsUtils {
     public static Dialog<String> editTextDialog(String value) {
         TextInputDialog dialog = new TextInputDialog(value);
         dialog.setHeaderText(null);
+        dialog.setContentText(null);
         dialog.setTitle(bundle.getString("mainApplicationWindow.editChoiceBox.title"));
        return dialog;
 
@@ -92,6 +93,7 @@ public class DialogsUtils {
 
     public static ChoiceDialog<String> editChoiceBoxInformation(String value,ArrayList<String> list){
         ChoiceDialog<String> dialog = new ChoiceDialog(value,list);
+        dialog.setContentText(null);
         dialog.setTitle(bundle.getString("mainApplicationWindow.editChoiceBox.title"));
         return dialog;
     }
